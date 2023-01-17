@@ -22,14 +22,14 @@ class MoviesController < ApplicationController
 
   def create
     @movie = Movie.new
-    @movie.title = params.fetch("title")
-    @movie.description = params.fetch("description")
+    @movie.title = params.fetch(:title)
+    @movie.description = params.fetch(:description)
 
     if @movie.valid?
       @movie.save
       redirect_to movies_url, notice: "Movie created successfully."
     else
-      render template: "/movies/new"
+      render "new"
     end
   end
 
@@ -40,8 +40,8 @@ class MoviesController < ApplicationController
   def update
     movie = Movie.find(params.fetch(:id))
 
-    movie.title = params.fetch("title")
-    movie.description = params.fetch("description")
+    movie.title = params.fetch(:title)
+    movie.description = params.fetch(:description)
 
     if movie.valid?
       movie.save
