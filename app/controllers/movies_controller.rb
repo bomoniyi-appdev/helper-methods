@@ -17,13 +17,13 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie = Movie.where(id: params.fetch(:id)).first
+    @movie = Movie.find(params.fetch(:id))
   end
 
   def create
     @movie = Movie.new
-    @movie.title = params.fetch(:title)
-    @movie.description = params.fetch(:description)
+    @movie.title = params.fetch(:movie).fetch(:title)
+    @movie.description = params.fetch(:movie).fetch(:description)
 
     if @movie.valid?
       @movie.save
